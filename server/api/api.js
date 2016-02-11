@@ -1,7 +1,6 @@
 var router = require('express').Router();
 
-router.use('/daily', require('./daily/dailyRoutes'));
-router.use('/weekly', require('./weekly/weeklyRoutes'));
-router.use('/monthly', require('./monthly/monthlyRoutes'));
+router.use('/trending', require('./trending/trendingRoutes'));
+// router.use('/local_graph', require('./local_graph/localGraphRoutes'));
 
 module.exports = router;
