@@ -1,4 +1,6 @@
 var _ = require('lodash');
+var redis = require('redis');
+var client = redis.createClient(); // By default will use 127.0.0.1 and 6379 as the hostname and port respectively
 
 exports.getAll = function(req, res, next) {
   var namespace = 'weekly:';
@@ -19,9 +21,16 @@ exports.getAll = function(req, res, next) {
 
 
 exports.getForLang = function(req, res, next) {
-  var path = req.params.language;
+  var namespace = req.params.language+":";
+  var time_range = req.params.time_range || 'curr_week';
+  var trending_modifier = req.params.trending_modifier || 'high';
 
-  var namespace = 'weekly:';
+  // for loop in [[400, 6], ...] return arrays of all data
+  // [[],[],[]].forEach(function(tuple){
+
+  // })
+
+  var path = time_range+"_"+trending_modifier;
   var key = namespace + path;
 
   client.zrevrange(key, 0, -1, 'withscores', function (err, members){
